@@ -1,0 +1,23 @@
+name: Sync to Gitee
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    # 每天凌晨 2 点自动同步
+    - cron: '0 18 * * *'  # UTC 时间，北京时间凌晨 2 点
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: Yikun/hub-mirror-action@v1.4
+        with:
+          src: github/Drlee00
+          dst: gitee/Drlee00
+          dst_key: ${{ secrets.GITEE_TOKEN }}
+          dst_token: ${{ secrets.GITEE_TOKEN }}
+          static_list: "financial-services"
+          force_update: true
