@@ -4,9 +4,8 @@ on:
   push:
     branches: [ main ]
   schedule:
-    # 每天凌晨 2 点自动同步
-    - cron: '0 18 * * *'  # UTC 时间，北京时间凌晨 2 点
-  workflow_dispatch:  # 允许手动触发
+    - cron: '0 18 * * *'
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -20,3 +19,5 @@ jobs:
           dst_token: ${{ secrets.GITEE_TOKEN }}
           static_list: "financial-services"
           force_update: true
+          account_type: user
+          clone_style: https
